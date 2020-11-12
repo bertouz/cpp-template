@@ -1,9 +1,14 @@
 #include "hello.hpp"
 
-namespace MyCppProject
+namespace my_cpp_project
 {
 void greet(std::ostream &pOs)
 {
     pOs << "hello world";
 }
-} // namespace MyCppProject
+
+void PolitePerson::hello()
+{
+    greet(std::cout);
+}
+} // namespace my_cpp_project
