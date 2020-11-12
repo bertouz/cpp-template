@@ -4,11 +4,12 @@
 
 namespace MyCppProject
 {
-    /**
-     * @brief greet - Function that append to a given stream the message "hello world"
-     * @param pOs - stream in which we want to greet
-     */
-    void greet(std::ostream& pOs);
-}
+/**
+ * @brief greet - Function that append to a given stream the message "hello world"
+ * @param pOs - stream in which we want to greet
+ */
+void greet(std::ostream &pOs);
+
+} // namespace MyCppProject
 
 #endif // HELLO_HPP

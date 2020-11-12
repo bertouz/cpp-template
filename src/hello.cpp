@@ -2,9 +2,8 @@
 
 namespace MyCppProject
 {
-    void greet(std::ostream& pOs)
-    {
-        pOs<<"hello world";
-    }
-
+void greet(std::ostream &pOs)
+{
+    pOs << "hello world";
 }
+} // namespace MyCppProject
