@@ -12,6 +12,8 @@ project(MyCppProject
 include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
 include(${CMAKE_SOURCE_DIR}/cmake/mycppproject-macro.cmake)
+include(FindPackageHandleStandardArgs)
+
 if (CMAKE_BINARY_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
     message(FATAL_ERROR "Building in-source is not supported! Create a build dir and remove ${CMAKE_SOURCE_DIR}/CMakeCache.txt")
 endif()
@@ -28,6 +30,9 @@ option(USE_SUBMODULE_Catch2 "Use submodule Catch2" ON)
 #############################
 if(BUILD_DOC)
         find_package(Doxygen REQUIRED)
+        #find_package(Sphinx REQUIRED)
+        find_program(SPHINX_EXECUTABLE NAMES sphinx-build DOC "Path to sphinx-build executable")
+        find_package_handle_standard_args(Sphinx "Failed to find sphinx-build executable" SPHINX_EXECUTABLE)
 endif(BUILD_DOC)
 
 # I prefer to look for all the dependecies at the start
