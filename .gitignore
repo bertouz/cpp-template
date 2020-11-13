@@ -37,3 +37,5 @@ build*
 # For QtCreator
 *.txt.user
 *.autosave
+
+compile_commands.json
