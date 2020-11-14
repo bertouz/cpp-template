@@ -25,8 +25,8 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/Bertouz/CppTemplate/tree/release/doc/images">
-    <img src="logo.jpg" alt="Logo" width="80" height="80">
+  <a href="https://github.com/Bertouz/CppTemplate/">
+    <img src="doc/images/logo.jpg" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">Cpp-Template</h3>
