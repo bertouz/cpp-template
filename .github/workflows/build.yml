@@ -27,6 +27,11 @@ jobs:
         run: |
           sudo apt-get install gcovr
           sudo apt-get install doxygen
+          git clone https://github.com/catchorg/Catch2
+          cd Catch2
+          mkdir build && cd build
+          cmake ..
+          make install
       
       # Run cmake
       - name : Run cmake
