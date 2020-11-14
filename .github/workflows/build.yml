@@ -24,7 +24,7 @@ jobs:
 
       # Install gcovr with package manager
       - name: Get gcovr
-        run: apt-get install gcovr
+        run: sudo apt-get install gcovr
       
       # Create build directory
       - name: Create build directory
