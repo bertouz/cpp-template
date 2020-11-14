@@ -26,7 +26,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/Bertouz/CppTemplate/">
-    <img src="doc/images/logo.jpg" alt="Logo" width="80" height="80">
+    <img src="doc/images/logo.jpg" alt="Logo" width="160" height="160">
   </a>
 
   <h3 align="center">Cpp-Template</h3>
