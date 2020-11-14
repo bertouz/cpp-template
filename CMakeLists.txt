@@ -26,7 +26,6 @@ list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/)
 include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
 include(FindPackageHandleStandardArgs)
-include(MyCppProjectUtils)
 
 
 if(ENABLE_CLANG_TIDY)
@@ -52,7 +51,7 @@ if(ENABLE_CODE_COVERAGE)
         NAME coverage
         EXECUTABLE ctest
         DEPENCIES testu
-        EXCLUDE external
+        EXCLUDE tests
         )
     list(POP_BACK CMAKE_MESSAGE_INDENT )
 endif(ENABLE_CODE_COVERAGE)
@@ -77,7 +76,7 @@ endif(BUILD_DOC)
 # to avoid a user to look for different find_package in dedicated subdirectory
 # Also if possible I add the possibility to use external dependencies in submodules to simplify a first use
 if(BUILD_TESTS)
-    add_submodule_dep(Catch2)
+	find_package(Catch2 REQUIRED)
 endif(BUILD_TESTS)
 
 
