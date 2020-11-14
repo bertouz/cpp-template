@@ -26,6 +26,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get install gcovr
+          sudo apt-get install doxygen
       
       # Run cmake
       - name : Run cmake
