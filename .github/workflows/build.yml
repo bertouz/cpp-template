@@ -22,13 +22,16 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      # Install gcovr with package manager
-      - name: Get gcovr
-        run: sudo apt-get install gcovr
+      # Install dependencies
+      - name: Install dependencies
+        run: |
+          sudo apt-get install gcovr
       
       # Create build directory
       - name: Create build directory
-        run: mkdir -p build && cd build
+        run: |
+          mkdir build
+          cd build
       
       # Run cmake
       - name : Run cmake
