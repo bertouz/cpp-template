@@ -16,8 +16,6 @@ CheckOptions:
     value:           10
   - key:             readability-function-size.ParameterThreshold
     value:           6
-  - key:             readability-function-size.NestingThreshold
-    value:           3
   - key:             readability-function-size.VariableThreshold
     value:           20
   - key:             readability-identifier-naming.ClassCase
@@ -60,3 +58,5 @@ CheckOptions:
     value:           CamelCase
   - key:             readability-identifier-naming.VariableCase
     value:           lower_case
+  #- key:             readability-function-size.NestingThreshold #Uncomment when there is a solution to not take Catch2 macros in consideration but i dont think its possible
+  #  value:           3

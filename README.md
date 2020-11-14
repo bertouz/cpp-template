@@ -122,6 +122,14 @@ sudo apt-get install clang-format
 sudo apt-get install clang-tidy
 ```
 
+To use clang tools it is better to generate compilation database. cmake offer an easy way
+
+```sh
+cd build
+cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ..
+ln -s compile_commands.json ../compile_commands.json
+```
+
 #### 3. Install Doxygen (optional)
 
 For documation generation we use doxygen.
@@ -186,6 +194,7 @@ make install
 Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
 
 _For more examples, please refer to the [Documentation](https://example.com)_
+
 
 
 

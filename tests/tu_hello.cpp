@@ -1,8 +1,8 @@
+#include "hello.hpp"
 #include <catch2/catch_test_macros.hpp>
 #include <sstream>
-#include "hello.hpp"
 
-SCENARIO("We want to be able to greet someone in a stream","[hello][greet]")
+SCENARIO("We want to be able to greet someone in a stream", "[hello][greet]")
 {
     GIVEN("A ostream")
     {
