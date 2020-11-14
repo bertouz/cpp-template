@@ -32,6 +32,8 @@ jobs:
         run: |
           mkdir build
           cd build
+          echo "$PWD"
+          ls ..
       
       # Run cmake
       - name : Run cmake
