@@ -31,7 +31,7 @@ jobs:
           cd Catch2
           mkdir build && cd build
           cmake ..
-          make install
+          sudo make install
       
       # Run cmake
       - name : Run cmake
