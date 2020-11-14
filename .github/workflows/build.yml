@@ -27,20 +27,10 @@ jobs:
         run: |
           sudo apt-get install gcovr
       
-      # Create build directory
-      - name: Create build directory
-        run: |
-          mkdir build
-          cd build
-          echo "$PWD"
-          ls ..
-      
       # Run cmake
       - name : Run cmake
         run: |
+          mkdir build
+          cd build
           cmake -DENABLE_CODE_COVERAGE=ON -DENABLE_CLANG_TIDY=ON -DENABLE_CLANG_FORMAT=ON -DBUILD_DOC=ON -DBUILD_TESTS=ON -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ..
-          ln -s compile_commands.json ../compile_commands.json
-          
-      # Runs a set of commands using the runners shell
-      - name: Build
-        run: make
+          make          
