@@ -248,5 +248,5 @@ Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.c
 [issues-shield]: https://img.shields.io/github/issues-raw/Bertouz/CppTemplate 
 [issues-url]: https://github.com/Bertouz/CppTemplate/issues
 [license-shield]: https://img.shields.io/github/license/Bertouz/CppTemplate
-[license-url]: httpt://github.com/Bertouz/CppTemplate/LICENSE.txt
+[license-url]: https://github.com/Bertouz/CppTemplate/blob/release/LICENSE 
 [product-screenshot]: images/doc/images/Logo_template.png
