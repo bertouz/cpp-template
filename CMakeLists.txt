@@ -6,24 +6,62 @@ project(MyCppProject
     )
 
 #############################
-### CMake config
+### Project Options
 #############################
+include(CMakeDependentOption)
+option(BUILD_DOC "Build documentation" ON)
+option(BUILD_TESTS "Build unit testing" ON)
+cmake_dependent_option(USE_SUBMODULE_Catch2 "Use submodule Catch2" ON "BUILD_TESTS" OFF)
+option(ENABLE_CODE_COVERAGE "Add gcov/lcov analysis to process" ON)
+option(ENABLE_CLANG_TIDY "Add clang-tidy analysis to source code" ON)
+option(ENABLE_CLANG_FORMAT "Add clang-format to build process" ON)
+
+####################################
+### Include cmake scripts and config
+####################################
+set(CMAKE_BUILD_TYPE "Debug")
+
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/)
 
 include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
-include(${CMAKE_SOURCE_DIR}/cmake/mycppproject-macro.cmake)
 include(FindPackageHandleStandardArgs)
+include(MyCppProjectUtils)
+
+
+if(ENABLE_CLANG_TIDY)
+    message(STATUS "Enabling code static analysis with clang-tidy")
+    list(APPEND CMAKE_MESSAGE_INDENT "  ")
+    include(UseClangTidy)
+    list(POP_BACK CMAKE_MESSAGE_INDENT)
+endif(ENABLE_CLANG_TIDY)
+
+if(ENABLE_CLANG_FORMAT)
+    list(APPEND CMAKE_MESSAGE_INDENT "  ")
+    message(STATUS "Enabling code formatting with clang-format")
+    include(UseClangFormat)
+    list(POP_BACK CMAKE_MESSAGE_INDENT)
+endif(ENABLE_CLANG_FORMAT)
+
+if(ENABLE_CODE_COVERAGE)
+    message(STATUS "Enabling code coverage with gcov")
+    list(APPEND CMAKE_MESSAGE_INDENT "  ")
+    include(UseCodeCoverage)
+    append_coverage_compiler_flags()
+    setup_target_for_coverage_gcovr_html(
+        NAME coverage
+        EXECUTABLE ctest
+        DEPENCIES testu
+        EXCLUDE external
+        )
+    list(POP_BACK CMAKE_MESSAGE_INDENT )
+endif(ENABLE_CODE_COVERAGE)
 
 if (CMAKE_BINARY_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
     message(FATAL_ERROR "Building in-source is not supported! Create a build dir and remove ${CMAKE_SOURCE_DIR}/CMakeCache.txt")
 endif()
 
-#############################
-### Project Options
-#############################
-option(BUILD_DOC "Build documentation" OFF)
-option(BUILD_TESTS "Build unit testing" ON)
-option(USE_SUBMODULE_Catch2 "Use submodule Catch2" ON)
+
 
 #############################
 ### Dependencies
@@ -46,7 +84,9 @@ endif(BUILD_TESTS)
 #############################
 ### MyCppProject
 #############################
+add_library(MyCppProject SHARED "" )
 add_subdirectory(src)
+
 
 #############################
 ### Tests
@@ -69,7 +109,7 @@ endif(BUILD_DOC)
 
 # Install documentation
 if(BUILD_DOC)
-    install( DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/doc/doc/" DESTINATION "${CMAKE_INSTALL_DOCDIR}" )
+    install( DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/doc/doxygen" DESTINATION "${CMAKE_INSTALL_DOCDIR}" )
 endif(BUILD_DOC)
 
 # Configuration

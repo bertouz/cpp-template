@@ -1,9 +1,11 @@
 #define CATCH_CONFIG_RUNNER
 #include <catch2/catch_session.hpp>
+#include "hello.hpp"
 
 int main(int argc, char* argv[])
 {
     const int res = Catch::Session().run(argc, argv);
-
+    my_cpp_project::PolitePerson person;
+    person.hello();
     return res;
 }

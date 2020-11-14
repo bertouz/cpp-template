@@ -1,0 +1,4 @@
+find_program(CLANG_FORMAT_EXECUTABLE clang-format REQUIRED)
+if(CLANG_FORMAT_EXECUTABLE)
+    message(STATUS "Found clang-format = ${CLANG_FORMAT_EXECUTABLE}")
+endif(CLANG_FORMAT_EXECUTABLE)
