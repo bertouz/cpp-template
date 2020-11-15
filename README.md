@@ -15,7 +15,7 @@
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
 
-[![Status][build-shield][build-url]]
+[![release-branch-status][build-shield]][build-url]
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Issues][issues-shield]][issues-url]
