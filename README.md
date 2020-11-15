@@ -15,6 +15,7 @@
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
 
+[![Status][build-shield][build-url]]
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Issues][issues-shield]][issues-url]
@@ -250,3 +251,5 @@ Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.c
 [license-shield]: https://img.shields.io/github/license/Bertouz/CppTemplate
 [license-url]: https://github.com/Bertouz/CppTemplate/blob/release/LICENSE 
 [product-screenshot]: images/doc/images/Logo_template.png
+[build-shield] : https://img.shields.io/github/workflow/status/Bertouz/CppTemplate/Build/release
+[build-url] : https://github.com/Bertouz/CppTemplate/workflows/Build
