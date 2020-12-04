@@ -144,3 +144,6 @@ install( FILES "${project_config}" "${version_config}" DESTINATION "${config_ins
 
 #Install config file for exported targets
 install( EXPORT "${TARGETS_EXPORT_NAME}" NAMESPACE "${namespace}" DESTINATION "${config_install_dir}" )
+
+#Install includes 
+install(DIRECTORY ${CMAKE_SOURCE_DIR}/src/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME} FILES_MATCHING PATTERN *.h*)
