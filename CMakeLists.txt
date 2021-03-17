@@ -11,7 +11,6 @@ project(MyCppProject
 include(CMakeDependentOption)
 option(BUILD_DOC "Build documentation" ON)
 option(BUILD_TESTS "Build unit testing" ON)
-cmake_dependent_option(USE_SUBMODULE_Catch2 "Use submodule Catch2" ON "BUILD_TESTS" OFF)
 option(ENABLE_CODE_COVERAGE "Add gcov/lcov analysis to process" ON)
 option(ENABLE_CLANG_TIDY "Add clang-tidy analysis to source code" ON)
 option(ENABLE_CLANG_FORMAT "Add clang-format to build process" ON)
