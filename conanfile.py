@@ -4,11 +4,11 @@ from conans import ConanFile, CMake, tools
 class CppTemplateConan(ConanFile):
     name = "CppTemplate"
     version = "0.0.1"
-    license = "MIT Licence"
-    author = "Bertouz la tarlouze"
-    url = "https://github.com/Bertouz/CppTemplate"
-    description = "It is a C++ template project, I want to include all my default config for clang tools, conan, etc..."
-    topics = ("template", "c++")
+    license = "<Put the package license here>"
+    author = "<Put your name here> <And your email here>"
+    url = "<Package recipe repository url here, for issues about the package>"
+    description = "<Description of CppTemplate here>"
+    topics = ("<Put some tag here>", "<here>", "<and here>")
     settings = "os", "compiler", "build_type", "arch"
     options = {"shared": [True, False]}
     default_options = {"shared": False}
