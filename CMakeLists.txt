@@ -5,6 +5,12 @@ project(MyCppProject
     LANGUAGES CXX
     )
 
+## When we do conan install we download and/or build the dependencies
+## Then a conanbuildinfo.cmake file is generated with the variables defining the targets
+## to those dependencies
+include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
+conan_basic_setup()
+
 #############################
 ### Project Options
 #############################
