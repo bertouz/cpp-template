@@ -8,8 +8,6 @@ project(MyCppProject
 ## When we do conan install we download and/or build the dependencies
 ## Then a conanbuildinfo.cmake file is generated with the variables defining the targets
 ## to those dependencies
-include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
-conan_basic_setup()
 
 #############################
 ### Project Options
@@ -18,7 +16,7 @@ include(CMakeDependentOption)
 
 option(BUILD_DOC "Build documentation" OFF) 
 option(BUILD_TESTS "Build unit testing" ON)
-option(USE_CONAN "Define if we want to use conan for handling dependencies if its available" ON)
+option(USE_CONAN "Define if we want to use conan for handling dependencies if its available" OFF)
 option(ENABLE_CODE_COVERAGE "Add gcov/lcov analysis to process" OFF)
 option(ENABLE_CLANG_TIDY "Add clang-tidy analysis to source code" ON)
 option(ENABLE_CLANG_FORMAT "Add clang-format to build process" ON)
@@ -27,6 +25,11 @@ option(ENABLE_CLANG_FORMAT "Add clang-format to build process" ON)
 ####################################
 ### Include cmake scripts and config
 ####################################
+if(USE_CONAN)
+	#include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
+	#conan_basic_setup()
+endif()
+
 if(CONAN_CMAKE_CXX_STANDARD)
 	set(CMAKE_CXX_STANDARD ${CONAN_CMAKE_CXX_STANDARD})
 else()
