@@ -1,5 +1,6 @@
 from conans import ConanFile, CMake, tools
 from conans.errors import ConanInvalidConfiguration
+import os
 
 
 
@@ -16,6 +17,11 @@ class CppTemplateConan(ConanFile):
     default_options = {"shared": False, "build_doc":False, "build_test":False, "use_conan":True, "enable_code_coverage":False, "enable_clang_tidy":False, "enable_clang_format":False}
     generators = "cmake_find_package"
     requires= []
+    scm = { "type": "git",  # Use "type": "svn", if local repo is managed using SVN
+            "subfolder": "CppTemplate",
+            "url": "auto",
+            "revision": "auto",
+            "password": os.environ.get("SECRET", None)}
 
     def configure(self):
         if self.settings.compiler.cppstd not in ["11", "14","17"]:
@@ -30,19 +36,15 @@ class CppTemplateConan(ConanFile):
         cmake.definitions["ENABLE_CODE_COVERAGE"] = kv[self.options.enable_code_coverage == True]
         cmake.definitions["ENABLE_CLANG_TIDY"]    = kv[self.options.enable_clang_tidy == True]
         cmake.definitions["ENABLE_CLANG_FORMAT"]  = kv[self.options.enable_clang_format == True]
-        cmake.configure()
+        cmake.configure(source_folder="CppTemplate")
         return cmake
 
     def requirements(self):
-        print("----- requirements -----")
-        print(self.options.build_test)
-        # Or add a new requirement!
         if self.options.build_test == True:
-            print("adding catch2/3.0.0@catchorg/stable")
             self.requires("catch2/3.0.0@catchorg/stable")
 
-    def source(self):
-        self.run("".join(["git clone ",self.url]))
+    #def source(self):
+        #self.run("".join(["git clone ",self.url]))
 
     def build(self):
         cmake = self.configure_cmake()
