@@ -27,6 +27,8 @@ jobs:
         run: |
           sudo apt-get install gcovr
           sudo apt-get install doxygen
+          sudo apt-get install clang-format
+          sudo apt-get install clang-tidy
           git clone https://github.com/catchorg/Catch2
           cd Catch2
           mkdir build && cd build
