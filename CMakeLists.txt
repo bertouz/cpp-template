@@ -26,8 +26,12 @@ option(ENABLE_CLANG_FORMAT "Add clang-format to build process" OFF)
 ### Include cmake scripts and config
 ####################################
 if(USE_CONAN)
-	#include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
-	#conan_basic_setup()
+	message(STATUS "Using conan generated FindXXX.cmake files")
+	list(PREPEND CMAKE_MODULE_PATH ${CMAKE_BINARY_DIR})
+endif()
+
+if(CONAN_CXX_COMPILER)
+	set(CMAKE_CXX_STANDARD ${CONAN_CMAKE_CXX_COMPILER})
 endif()
 
 if(CONAN_CMAKE_CXX_STANDARD)
@@ -92,7 +96,9 @@ if(BUILD_DOC)
 endif(BUILD_DOC)
 
 if(BUILD_TESTS)
-	find_package(Catch2 REQUIRED)
+	if(NOT Catch2_FOUND)
+		find_package(Catch2 3 REQUIRED)
+	endif()
 endif(BUILD_TESTS)
 
 #############################

@@ -36,26 +36,18 @@ class CppTemplateConan(ConanFile):
         cmake.definitions["ENABLE_CODE_COVERAGE"] = kv[self.options.enable_code_coverage == True]
         cmake.definitions["ENABLE_CLANG_TIDY"]    = kv[self.options.enable_clang_tidy == True]
         cmake.definitions["ENABLE_CLANG_FORMAT"]  = kv[self.options.enable_clang_format == True]
-        cmake.configure(source_folder="CppTemplate")
+        cmake.configure()
         return cmake
 
     def requirements(self):
         if self.options.build_test == True:
             self.requires("catch2/3.0.0@catchorg/stable")
 
-    #def source(self):
-        #self.run("".join(["git clone ",self.url]))
-
     def build(self):
         cmake = self.configure_cmake()
         cmake.build()
         if self.options.build_test is True:
             cmake.test()
-
-        # Explicit way:
-        # self.run('cmake %s/hello %s'
-        #          % (self.source_folder, cmake.command_line))
-        # self.run("cmake --build . %s" % cmake.build_config)
 
     def package(self):
         cmake = self.configure_cmake()
