@@ -15,11 +15,11 @@ project(MyCppProject
 include(CMakeDependentOption)
 
 option(BUILD_DOC "Build documentation" OFF) 
-option(BUILD_TESTS "Build unit testing" ON)
+option(BUILD_TESTS "Build unit testing" OFF)
 option(USE_CONAN "Define if we want to use conan for handling dependencies if its available" OFF)
 option(ENABLE_CODE_COVERAGE "Add gcov/lcov analysis to process" OFF)
-option(ENABLE_CLANG_TIDY "Add clang-tidy analysis to source code" ON)
-option(ENABLE_CLANG_FORMAT "Add clang-format to build process" ON)
+option(ENABLE_CLANG_TIDY "Add clang-tidy analysis to source code" OFF)
+option(ENABLE_CLANG_FORMAT "Add clang-format to build process" OFF)
 
 
 ####################################
