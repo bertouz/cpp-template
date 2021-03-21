@@ -39,6 +39,6 @@ if(Doxygen_FOUND)
     endif()
 
 else()
-    message(FATAL "To build the documentation we need ")
+    message(FATAL "To build the documentation we need doxygen")
 endif(Doxygen_FOUND)
 list(POP_BACK CMAKE_MESSAGE_INDENT)

@@ -5,21 +5,36 @@ project(MyCppProject
     LANGUAGES CXX
     )
 
+## When we do conan install we download and/or build the dependencies
+## Then a conanbuildinfo.cmake file is generated with the variables defining the targets
+## to those dependencies
+
 #############################
 ### Project Options
 #############################
 include(CMakeDependentOption)
-option(BUILD_DOC "Build documentation" ON)
+
+option(BUILD_DOC "Build documentation" OFF) 
 option(BUILD_TESTS "Build unit testing" ON)
-cmake_dependent_option(USE_SUBMODULE_Catch2 "Use submodule Catch2" ON "BUILD_TESTS" OFF)
-option(ENABLE_CODE_COVERAGE "Add gcov/lcov analysis to process" ON)
+option(USE_CONAN "Define if we want to use conan for handling dependencies if its available" OFF)
+option(ENABLE_CODE_COVERAGE "Add gcov/lcov analysis to process" OFF)
 option(ENABLE_CLANG_TIDY "Add clang-tidy analysis to source code" ON)
 option(ENABLE_CLANG_FORMAT "Add clang-format to build process" ON)
+
 
 ####################################
 ### Include cmake scripts and config
 ####################################
-set(CMAKE_BUILD_TYPE "Debug")
+if(USE_CONAN)
+	#include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
+	#conan_basic_setup()
+endif()
+
+if(CONAN_CMAKE_CXX_STANDARD)
+	set(CMAKE_CXX_STANDARD ${CONAN_CMAKE_CXX_STANDARD})
+else()
+	set(CMAKE_CXX_STANDARD 14)
+endif()
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/)
 
@@ -65,20 +80,20 @@ endif()
 #############################
 ### Dependencies
 #############################
-if(BUILD_DOC)
-        find_package(Doxygen REQUIRED)
-        #find_package(Sphinx REQUIRED)
-        find_program(SPHINX_EXECUTABLE NAMES sphinx-build DOC "Path to sphinx-build executable")
-        find_package_handle_standard_args(Sphinx "Failed to find sphinx-build executable" SPHINX_EXECUTABLE)
-endif(BUILD_DOC)
-
 # I prefer to look for all the dependecies at the start
 # to avoid a user to look for different find_package in dedicated subdirectory
 # Also if possible I add the possibility to use external dependencies in submodules to simplify a first use
+
+if(BUILD_DOC)
+	find_package(Doxygen REQUIRED)
+	#find_package(Sphinx REQUIRED)
+	find_program(SPHINX_EXECUTABLE NAMES sphinx-build DOC "Path to sphinx-build executable")
+	find_package_handle_standard_args(Sphinx "Failed to find sphinx-build executable" SPHINX_EXECUTABLE)
+endif(BUILD_DOC)
+
 if(BUILD_TESTS)
 	find_package(Catch2 REQUIRED)
 endif(BUILD_TESTS)
-
 
 #############################
 ### MyCppProject

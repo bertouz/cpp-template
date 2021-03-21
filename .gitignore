@@ -38,4 +38,6 @@ build*
 *.txt.user
 *.autosave
 
+#For vim
+*.swp
 compile_commands.json
