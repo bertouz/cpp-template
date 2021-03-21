@@ -24,18 +24,21 @@ class CppTemplateConan(ConanFile):
     def configure_cmake(self):
         cmake = CMake(self)
         kv = {True:"On", False:"Off"}
-        cmake.definitions["BUILD_DOC"]            = kv[self.options.build_doc is True]
-        cmake.definitions["BUILD_TESTS"]          = kv[self.options.build_test is True]
+        cmake.definitions["BUILD_DOC"]            = kv[self.options.build_doc == True]
+        cmake.definitions["BUILD_TESTS"]          = kv[self.options.build_test == True]
         cmake.definitions["USE_CONAN"]            = kv[True] 
-        cmake.definitions["ENABLE_CODE_COVERAGE"] = kv[self.options.enable_code_coverage is True]
-        cmake.definitions["ENABLE_CLANG_TIDY"]    = kv[self.options.enable_clang_tidy is True]
-        cmake.definitions["ENABLE_CLANG_FORMAT"]  = kv[self.options.enable_clang_format is True]
+        cmake.definitions["ENABLE_CODE_COVERAGE"] = kv[self.options.enable_code_coverage == True]
+        cmake.definitions["ENABLE_CLANG_TIDY"]    = kv[self.options.enable_clang_tidy == True]
+        cmake.definitions["ENABLE_CLANG_FORMAT"]  = kv[self.options.enable_clang_format == True]
         cmake.configure()
         return cmake
 
     def requirements(self):
+        print("----- requirements -----")
+        print(self.options.build_test)
         # Or add a new requirement!
-        if self.options.build_test is True:
+        if self.options.build_test == True:
+            print("adding catch2/3.0.0@catchorg/stable")
             self.requires("catch2/3.0.0@catchorg/stable")
 
     def source(self):
