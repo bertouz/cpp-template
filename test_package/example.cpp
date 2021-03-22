@@ -1,6 +1,7 @@
 #include <iostream>
-#include "hello.h"
+#include "MyCppProject/hello.hpp"
 
 int main() {
-    hello();
+    my_cpp_project::greet(std::cout);
+    return 0;
 }

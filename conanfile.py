@@ -52,5 +52,6 @@ class CppTemplateConan(ConanFile):
         cmake.install()
 
     def package_info(self):
-        self.cpp_info.libs = ["CppTemplate"]
+        self.cpp_info.libs    = ["libMyCppProject"]
+        self.cpp_info.libdirs = ["lib"]  # Directories where libraries can be found
 
