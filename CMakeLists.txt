@@ -25,6 +25,10 @@ option(ENABLE_CLANG_FORMAT "Add clang-format to build process" OFF)
 ####################################
 ### Include cmake scripts and config
 ####################################
+if(EXISTS ${CMAKE_BINARY_DIR}/conaninfo.txt)
+	set(USE_CONAN ON)
+endif()
+
 if(USE_CONAN)
 	message(STATUS "Using conan generated FindXXX.cmake files")
 	list(PREPEND CMAKE_MODULE_PATH ${CMAKE_BINARY_DIR})

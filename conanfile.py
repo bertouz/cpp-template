@@ -10,18 +10,16 @@ class CppTemplateConan(ConanFile):
     license = "MIT"
     author = "Bertouz blopiblop100@gmail.com"
     url = "https://github.com/Bertouz/CppTemplate"
-    description = "<Description of CppTemplate here>"
+    description = ""
     topics = ("c++", "template")
     settings = "os", "compiler", "build_type", "arch"
     options = {"shared": [True, False], "build_doc":[True, False], "build_test":[True, False], "use_conan":[True, False], "enable_code_coverage":[True, False], "enable_clang_tidy":[True, False], "enable_clang_format":[True, False] }
     default_options = {"shared": False, "build_doc":False, "build_test":False, "use_conan":True, "enable_code_coverage":False, "enable_clang_tidy":False, "enable_clang_format":False}
     generators = "cmake_find_package"
     requires= []
-    scm = { "type": "git",  # Use "type": "svn", if local repo is managed using SVN
-            "subfolder": "CppTemplate",
-            "url": "auto",
-            "revision": "auto",
-            "password": os.environ.get("SECRET", None)}
+
+    def source(self):
+        self.run("".join(["git clone ", self.url]))
 
     def configure(self):
         if self.settings.compiler.cppstd not in ["11", "14","17"]:
@@ -36,7 +34,7 @@ class CppTemplateConan(ConanFile):
         cmake.definitions["ENABLE_CODE_COVERAGE"] = kv[self.options.enable_code_coverage == True]
         cmake.definitions["ENABLE_CLANG_TIDY"]    = kv[self.options.enable_clang_tidy == True]
         cmake.definitions["ENABLE_CLANG_FORMAT"]  = kv[self.options.enable_clang_format == True]
-        cmake.configure()
+        cmake.configure(source_folder="CppTemplate")
         return cmake
 
     def requirements(self):
