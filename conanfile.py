@@ -52,6 +52,10 @@ class CppTemplateConan(ConanFile):
         cmake.install()
 
     def package_info(self):
+        # default behavior, doesn't need to be explicitly defined in recipes
+        self.cpp_info.includedirs = ["include"]
+        self.cpp_info.libdirs = ["lib/MyCppProject"]
+        self.cpp_info.bindirs = ["bin"]
+        self.cpp_info.resdirs = ["res"] 
         self.cpp_info.libs    = ["libMyCppProject"]
-        self.cpp_info.libdirs = ["lib"]  # Directories where libraries can be found
-
+$
