@@ -58,3 +58,4 @@ class CppTemplateConan(ConanFile):
         self.cpp_info.bindirs = ["bin"]
         self.cpp_info.resdirs = ["res"] 
         self.cpp_info.libs    = ["libMyCppProject"]
+$
