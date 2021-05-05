@@ -110,7 +110,9 @@ endif(BUILD_TESTS)
 #############################
 add_library(MyCppProject SHARED "" )
 add_subdirectory(src)
-
+target_include_directories(MyCppProject PUBLIC
+                       $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include> # for headers when building
+                       $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
 
 #############################
 ### Tests
@@ -158,8 +160,8 @@ configure_package_config_file(
 install(
     TARGETS MyCppProject #plus others if there is
     EXPORT "${TARGETS_EXPORT_NAME}"
-    LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}/${PROJECT_NAME}"
-    ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}/${PROJECT_NAME}"
+    LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}/"
+    ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}/"
     RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}"
     PUBLIC_HEADER DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}"
 )
@@ -171,4 +173,4 @@ install( FILES "${project_config}" "${version_config}" DESTINATION "${config_ins
 install( EXPORT "${TARGETS_EXPORT_NAME}" NAMESPACE "${namespace}" DESTINATION "${config_install_dir}" )
 
 #Install includes 
-install(DIRECTORY ${CMAKE_SOURCE_DIR}/src/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME} FILES_MATCHING PATTERN *.h*)
+install(DIRECTORY ${CMAKE_SOURCE_DIR}/include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME} FILES_MATCHING PATTERN *.h*)
