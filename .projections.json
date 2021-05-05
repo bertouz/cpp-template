@@ -1,0 +1,25 @@
+{
+	"include/*.hpp":
+	{
+		"type":"header",
+		"alternate":"src/{}.cpp"
+	},
+	"src/*.cpp":
+	{
+		"type":"source",
+		"alternate":"tests/unit/{}-test.cpp"
+	},
+	"tests/unit/*-test.cpp":
+	{
+		"type":"testu",
+		"alternate":"include/{}.hpp"
+	},
+	"main*.cpp":
+	{
+		"type":"main"
+	},
+	"README.md":
+	{
+		"type":"doc"
+	}
+}
