@@ -4,20 +4,20 @@
 
 namespace my_cpp_project
 {
-class IPoliTe
+class IPolite
 {
   public:
     virtual void hello() = 0;
 };
 
-class PolitePerson : public IPoliTe
+class PolitePerson : public IPolite
 {
   public:
     enum Sex
     {
         MALE,
         FEMELLE
-    } genre;
+    } sex;
 
     void hello() override;
 };
