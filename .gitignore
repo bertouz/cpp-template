@@ -41,3 +41,4 @@ build*
 #For vim
 *.swp
 compile_commands.json
+.cache

@@ -14,6 +14,11 @@
 		"type":"testu",
 		"alternate":"include/{}.hpp"
 	},
+	"benchmarks/micro/*-bench.cpp":
+	{
+		"type":"bench",
+		"alternate":"include/{}.hpp"
+	},
 	"main*.cpp":
 	{
 		"type":"main"
