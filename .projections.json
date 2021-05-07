@@ -1,5 +1,5 @@
 {
-	"include/*.hpp":
+	"include/MyCppProject/*.hpp":
 	{
 		"type":"header",
 		"alternate":"src/{}.cpp"
@@ -12,7 +12,7 @@
 	"tests/unit/*-test.cpp":
 	{
 		"type":"testu",
-		"alternate":"include/{}.hpp"
+		"alternate":"include/MyCppProject/{}.hpp"
 	},
 	"benchmarks/micro/*-bench.cpp":
 	{
