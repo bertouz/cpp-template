@@ -17,7 +17,7 @@
 	"benchmarks/micro/*-bench.cpp":
 	{
 		"type":"bench",
-		"alternate":"include/{}.hpp"
+		"alternate":"include/MyCppProject/{}.hpp"
 	},
 	"main*.cpp":
 	{
