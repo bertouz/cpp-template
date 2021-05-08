@@ -12,7 +12,6 @@ project(MyCppProject
 #############################
 ### Project Options
 #############################
-include(CMakeDependentOption)
 
 option(BUILD_DOC "Build documentation" OFF) 
 option(BUILD_TESTS "Build unit testing" OFF)
@@ -20,6 +19,7 @@ option(USE_CONAN "Define if we want to use conan for handling dependencies if it
 option(ENABLE_CODE_COVERAGE "Add gcov/lcov analysis to process" OFF)
 option(ENABLE_CLANG_TIDY "Add clang-tidy analysis to source code" OFF)
 option(ENABLE_CLANG_FORMAT "Add clang-format to build process" OFF)
+option(ENABLE_MICRO_BENCHMARKS "Build project microbenchmarks" OFF)
 
 
 ####################################
@@ -50,7 +50,6 @@ include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
 include(FindPackageHandleStandardArgs)
 
-
 if(ENABLE_CLANG_TIDY)
     message(STATUS "Enabling code static analysis with clang-tidy")
     list(APPEND CMAKE_MESSAGE_INDENT "  ")
@@ -59,8 +58,8 @@ if(ENABLE_CLANG_TIDY)
 endif(ENABLE_CLANG_TIDY)
 
 if(ENABLE_CLANG_FORMAT)
-    list(APPEND CMAKE_MESSAGE_INDENT "  ")
     message(STATUS "Enabling code formatting with clang-format")
+    list(APPEND CMAKE_MESSAGE_INDENT "  ")
     include(UseClangFormat)
     list(POP_BACK CMAKE_MESSAGE_INDENT)
 endif(ENABLE_CLANG_FORMAT)
@@ -78,6 +77,13 @@ if(ENABLE_CODE_COVERAGE)
         )
     list(POP_BACK CMAKE_MESSAGE_INDENT )
 endif(ENABLE_CODE_COVERAGE)
+
+if(ENABLE_MICRO_BENCHMARKS)
+    message(STATUS "Enabling project microbenchmarks")
+    list(APPEND CMAKE_MESSAGE_INDENT "  ")
+	find_package(benchmark REQUIRED)
+    list(POP_BACK CMAKE_MESSAGE_INDENT )
+endif(ENABLE_MICRO_BENCHMARKS)
 
 if (CMAKE_BINARY_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
     message(FATAL_ERROR "Building in-source is not supported! Create a build dir and remove ${CMAKE_SOURCE_DIR}/CMakeCache.txt")
@@ -130,6 +136,13 @@ if(BUILD_DOC)
 endif(BUILD_DOC)
 
 #############################
+### benchmarks
+#############################
+if(ENABLE_MICRO_BENCHMARKS)
+   add_subdirectory(benchmarks/micro)
+endif(ENABLE_MICRO_BENCHMARKS)
+
+#############################
 ### Installation
 #############################
 
@@ -173,4 +186,4 @@ install( FILES "${project_config}" "${version_config}" DESTINATION "${config_ins
 install( EXPORT "${TARGETS_EXPORT_NAME}" NAMESPACE "${namespace}" DESTINATION "${config_install_dir}" )
 
 #Install includes 
-install(DIRECTORY ${CMAKE_SOURCE_DIR}/include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME} FILES_MATCHING PATTERN *.h*)
+install(DIRECTORY ${CMAKE_SOURCE_DIR}/include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/ FILES_MATCHING PATTERN *.h*)

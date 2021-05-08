@@ -1,4 +1,4 @@
-#include "hello.hpp"
+#include "MyCppProject/hello.hpp"
 
 namespace my_cpp_project
 {
