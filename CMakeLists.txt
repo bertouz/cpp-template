@@ -12,6 +12,7 @@ project(MyCppProject
 #############################
 ### Project Options
 #############################
+include(CMakeDependentOption)
 
 option(BUILD_DOC "Build documentation" OFF) 
 option(BUILD_TESTS "Build unit testing" OFF)
@@ -20,6 +21,7 @@ option(ENABLE_CODE_COVERAGE "Add gcov/lcov analysis to process" OFF)
 option(ENABLE_CLANG_TIDY "Add clang-tidy analysis to source code" OFF)
 option(ENABLE_CLANG_FORMAT "Add clang-format to build process" OFF)
 option(ENABLE_MICRO_BENCHMARKS "Build project microbenchmarks" OFF)
+cmake_dependent_option(ENABLE_MEMCHECK "Add memory check to unit test" ON BUILD_TESTS OFF)
 
 
 ####################################
